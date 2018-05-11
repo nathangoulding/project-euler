@@ -1,7 +1,7 @@
 # Overview
 Personal solutions to projecteuler.net problems, written in go.
 
-# Usage
+# Installation
 
 Install golang, clone this repo, then build the `project-euler` binary:
 
@@ -9,21 +9,24 @@ Install golang, clone this repo, then build the `project-euler` binary:
 go build .
 ```
 
+# Usage
+
 ```bash
+[john@acmecorp ~]# ./project-euler
 Usage of ./project-euler:
   -p string
         The problem to run/test
   -r    Run a problem
   -t    Test a problem
-```
-
-For example:
-
-```bash
-/project-euler -p 12 -r
+[john@acmecorp ~]# ./project-euler -p 12 -r
 Looking for 500 divisors
 Found: 31337
 Run time: 592.265162ms
+[john@acmecorp ~]# ./project-euler -p 12 -t
+Looking for 500 divisors
+Found: 31337
+Run time: 665.191849ms
+Test passed!
 ```
 
 # Problems/Answers
