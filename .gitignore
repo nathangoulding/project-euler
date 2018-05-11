@@ -3,6 +3,7 @@
 *.dll
 *.so
 *.dylib
+project-euler
 
 # Test binary, build with `go test -c`
 *.test
@@ -16,3 +17,4 @@
 # intellij idea
 *.idea/**
 *.iml
+
