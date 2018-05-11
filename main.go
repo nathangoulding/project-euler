@@ -36,14 +36,23 @@ func main() {
 		os.Exit(1)
 	}
 	if p, err := problems.GetProblem(problem); err == nil {
-		if run {
-			start := time.Now()
-			p.Run()
-			fmt.Printf("Run time: %s\n", time.Since(start))
-		} else {
-			p.Test()
+		result := timedRun(p)
+		if test {
+			if result != p.Test() {
+				fmt.Print("Test failed!\n")
+				os.Exit(1)
+			}
+			fmt.Print("Test passed!\n")
 		}
 	} else {
 		panic(fmt.Sprintf("Invalid problem %s\n", problem))
 	}
+}
+
+func timedRun(p problems.Problem) int {
+	start := time.Now()
+	result := p.Run()
+	fmt.Printf("Found: %d\n", result)
+	fmt.Printf("Run time: %s\n", time.Since(start))
+	return result
 }

@@ -10,8 +10,8 @@ var (
 )
 
 type Problem interface {
-	Run()
-	Test()
+	Run() int
+	Test() int
 }
 
 func GetProblem(name string) (Problem, error) {
