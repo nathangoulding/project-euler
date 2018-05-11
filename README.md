@@ -32,3 +32,7 @@ Test passed!
 # Problems/Answers
 
 All problems are encrypted with git-crypt to obfuscate source code.
+
+<!---
+A sufficiently clever person will be able to decrypt these files.
+--->
