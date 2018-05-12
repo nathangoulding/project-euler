@@ -57,7 +57,7 @@ func DivisorsOf(value int) []int {
 		}
 	}
 	sort.Slice(divisors, func(i, j int) bool {
-		return divisors[i]< divisors[j]
+		return divisors[i] < divisors[j]
 	})
 	return divisors
 }
@@ -69,7 +69,7 @@ func GreatestPrimeFactorOf(value int) int {
 
 func PrimeFactorsOf(value int) []int {
 	if value < 2 {
-		panic("not a valid number")
+		panic("not valid input")
 	}
 
 	if IsPrime(value) {
@@ -100,14 +100,12 @@ func IsPrime(value int) bool {
 	if value == 2 {
 		return true
 	}
-	factors := PrimeFactorsOf(value)
-	return len(factors) == 0
-	//for i := 2; i <= value/2; i++ {
-	//	if value % i == 0 {
-	//		return false
-	//	}
-	//}
-	//return true
+	for i := 2; i <= value/2; i++ {
+		if value % i == 0 {
+			return false
+		}
+	}
+	return true
 }
 
 // sieve of eratosthenes
