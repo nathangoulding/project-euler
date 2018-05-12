@@ -3,6 +3,7 @@ package problems
 import (
 	"fmt"
 	"errors"
+	"math"
 )
 
 var (
@@ -21,22 +22,6 @@ func GetProblem(name string) (Problem, error) {
 	return nil, errors.New("problem does not exist")
 }
 
-func RunProblem(name string) {
-	if f, ok := problems[name]; ok {
-		f.Run()
-		return
-	}
-	panic(fmt.Sprintf("Invalid problem %s specific", name))
-}
-
-func TestProblem(name string) {
-	if f, ok := problems[name]; ok {
-		f.Test()
-		return
-	}
-	panic(fmt.Sprintf("Invalid problem %s specific", name))
-}
-
 func RegisterProblem(name string, problem Problem) {
 	if problems[name] != nil {
 		panic(fmt.Sprintf("Problem %s already registered", name))
@@ -51,4 +36,45 @@ func IntInSlice(a int, list []int) bool {
 		}
 	}
 	return false
+}
+
+func PrimeFactorsOf(value int) []int {
+	if value < 2 {
+		panic("not a valid number")
+	}
+
+	if IsPrime(value) {
+		return []int{value}
+	}
+	sqrt := int(math.Sqrt(float64(value)))
+	var primes []int
+
+L1:
+	for {
+L2:
+		for i := 2; i <= sqrt; i++ {
+			if value % i == 0 {
+				primes = append(primes, i)
+				value = value / i
+				if IsPrime(value) {
+					primes = append(primes, value)
+					break L1
+				}
+				break L2
+			}
+		}
+	}
+	return primes
+}
+
+func IsPrime(value int) bool {
+	if value == 2 {
+		return true
+	}
+	for i := 2; i < value/2; i++ {
+		if value % i == 0 {
+			return false
+		}
+	}
+	return true
 }
