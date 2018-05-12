@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"errors"
 	"math"
+	sort "sort"
 )
 
 var (
@@ -36,6 +37,34 @@ func IntInSlice(a int, list []int) bool {
 		}
 	}
 	return false
+}
+
+func GreatestCommonDivisorOf(value int) int {
+	factors := DivisorsOf(value)
+	return factors[len(factors) - 1]
+}
+
+func DivisorsOf(value int) []int {
+	var divisors []int
+	for j := 2; j <= int(math.Sqrt(float64(value))); j++ {
+		if value % j == 0 {
+			if value / j == j {
+				divisors = append(divisors, j)
+			} else {
+				divisors = append(divisors, j)
+				divisors = append(divisors, j, value / j)
+			}
+		}
+	}
+	sort.Slice(divisors, func(i, j int) bool {
+		return divisors[i]< divisors[j]
+	})
+	return divisors
+}
+
+func GreatestPrimeFactorOf(value int) int {
+	factors := PrimeFactorsOf(value)
+	return factors[len(factors) - 1]
 }
 
 func PrimeFactorsOf(value int) []int {
@@ -71,10 +100,37 @@ func IsPrime(value int) bool {
 	if value == 2 {
 		return true
 	}
-	for i := 2; i < value/2; i++ {
-		if value % i == 0 {
-			return false
+	factors := PrimeFactorsOf(value)
+	return len(factors) == 0
+	//for i := 2; i <= value/2; i++ {
+	//	if value % i == 0 {
+	//		return false
+	//	}
+	//}
+	//return true
+}
+
+// sieve of eratosthenes
+func PrimesBelow(value int) []int {
+
+	multipliers := make([]int, value - 1)
+	multipliers[0] = 1
+	multipliers[1] = 1
+
+	for i := 2; i <= value / 2; i++ {
+		for j := 2; j < value / j; j++ {
+			if i * j < value - 1 {
+				multipliers[i * j] = 1
+			}
 		}
 	}
-	return true
+
+	var primes []int
+	for i, value := range multipliers {
+		if value != 1 {
+			primes = append(primes, i)
+		}
+	}
+
+	return primes
 }
