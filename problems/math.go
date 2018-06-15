@@ -3,7 +3,35 @@ package problems
 import (
 	"sort"
 	"math"
+	"strconv"
+	"math/big"
 )
+
+func BigFactorial(num int) *big.Int {
+	factorial := big.NewInt(1)
+	for i := num; i > 1; i-- {
+		factorial.Mul(factorial, big.NewInt(int64(i)))
+	}
+	return factorial
+}
+
+
+func Factorial(num int) uint64 {
+	factorial := uint64(1)
+	for i := num; i > 1; i-- {
+		factorial = uint64(i) * factorial
+	}
+	return factorial
+}
+
+func SumBigIntDigits(num *big.Int) int {
+	var digits []int
+	for _, value := range num.String() {
+		i, _ := strconv.Atoi(string(value))
+		digits = append(digits, i)
+	}
+	return Summation(digits)
+}
 
 func BinomialCoefficientTriangle(rows [][]int) [][]int {
 	for i := range rows {
