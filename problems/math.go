@@ -133,13 +133,12 @@ func GreatestCommonDivisorOf(value int) int {
 }
 
 func DivisorsOf(value int) []int {
-	var divisors []int
+	divisors := []int{1}
 	for j := 2; j <= int(math.Sqrt(float64(value))); j++ {
 		if value % j == 0 {
 			if value / j == j {
 				divisors = append(divisors, j)
 			} else {
-				divisors = append(divisors, j)
 				divisors = append(divisors, j, value / j)
 			}
 		}
