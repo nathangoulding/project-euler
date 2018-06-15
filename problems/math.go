@@ -33,23 +33,6 @@ func SumBigIntDigits(num *big.Int) int {
 	return Summation(digits)
 }
 
-func BinomialCoefficientTriangle(rows [][]int) [][]int {
-	for i := range rows {
-		for j := range rows[i] {
-			if j != 0 && j != i {
-				rows[i][j] = rows[i][j] + rows[i - 1][j] + rows[i - 1][j - 1]
-			}
-			if j == 0 && i != 0 {
-				rows[i][j] = rows[i][j] + rows[i - 1][j]
-			}
-			if j == i && i != 0 {
-				rows[i][j] = rows[i][j] + rows[i - 1][j - 1]
-			}
-		}
-	}
-	return rows
-}
-
 func PascalsTriangle(rows int) [][]int {
 	grid := make([][]int, rows)
 	for i := range grid {
@@ -218,4 +201,94 @@ func PrimesBelow(value int64) []int {
 	}
 
 	return primes
+}
+
+func AlphabeticValues(word string) []int {
+	var values []int
+	for _, letter := range word {
+		values = append(values, AlphabeticValue(string(letter)))
+	}
+	return values
+}
+
+func AlphabeticValue(letter string) int {
+	if letter == "a" || letter == "A" {
+		return 1
+	}
+	if letter == "b" || letter == "B" {
+		return 2
+	}
+	if letter == "c" || letter == "C" {
+		return 3
+	}
+	if letter == "d" || letter == "D" {
+		return 4
+	}
+	if letter == "e" || letter == "E" {
+		return 5
+	}
+	if letter == "f" || letter == "F" {
+		return 6
+	}
+	if letter == "g" || letter == "G" {
+		return 7
+	}
+	if letter == "h" || letter == "H" {
+		return 8
+	}
+	if letter == "i" || letter == "I" {
+		return 9
+	}
+	if letter == "j" || letter == "J" {
+		return 10
+	}
+	if letter == "k" || letter == "K" {
+		return 11
+	}
+	if letter == "l" || letter == "L" {
+		return 12
+	}
+	if letter == "m" || letter == "M" {
+		return 13
+	}
+	if letter == "n" || letter == "N" {
+		return 14
+	}
+	if letter == "o" || letter == "O" {
+		return 15
+	}
+	if letter == "p" || letter == "P" {
+		return 16
+	}
+	if letter == "q" || letter == "Q" {
+		return 17
+	}
+	if letter == "r" || letter == "R" {
+		return 18
+	}
+	if letter == "s" || letter == "S" {
+		return 19
+	}
+	if letter == "t" || letter == "T" {
+		return 20
+	}
+	if letter == "u" || letter == "U" {
+		return 21
+	}
+	if letter == "v" || letter == "V" {
+		return 22
+	}
+	if letter == "w" || letter == "W" {
+		return 23
+	}
+	if letter == "x" || letter == "X" {
+		return 24
+	}
+	if letter == "y" || letter == "Y" {
+		return 25
+	}
+	if letter == "z" || letter == "Z" {
+		return 26
+	}
+	return -65535
 }
