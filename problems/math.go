@@ -5,7 +5,41 @@ import (
 	"math"
 )
 
-func BinomialCoefficient(n int, k int) [][]int {
+func BinomialCoefficientTriangle(rows [][]int) [][]int {
+	for i := range rows {
+		for j := range rows[i] {
+			if j != 0 && j != i {
+				rows[i][j] = rows[i][j] + rows[i - 1][j] + rows[i - 1][j - 1]
+			}
+			if j == 0 && i != 0 {
+				rows[i][j] = rows[i][j] + rows[i - 1][j]
+			}
+			if j == i && i != 0 {
+				rows[i][j] = rows[i][j] + rows[i - 1][j - 1]
+			}
+		}
+	}
+	return rows
+}
+
+func PascalsTriangle(rows int) [][]int {
+	grid := make([][]int, rows)
+	for i := range grid {
+		grid[i] = make([]int, i + 1)
+	}
+	for i := 0; i < rows; i++ {
+		for j := range grid[i] {
+			if j == 0 || j == i {
+				grid[i][j] = 1
+			} else {
+				grid[i][j] = grid[i - 1][j] + grid[i - 1][j - 1]
+			}
+		}
+	}
+	return grid
+}
+
+func BinomialCoefficientAsGrid(n int, k int) [][]int {
 	grid := make([][]int, n)
 	for i := range grid {
 		grid[i] = make([]int, k)
@@ -22,20 +56,20 @@ func BinomialCoefficient(n int, k int) [][]int {
 	return grid
 }
 
-func PadRight(str, pad string, lenght int) string {
+func PadRight(str, pad string, length int) string {
 	for {
 		str += pad
-		if len(str) > lenght {
-			return str[0:lenght]
+		if len(str) > length {
+			return str[0:length]
 		}
 	}
 }
 
-func PadLeft(str, pad string, lenght int) string {
+func PadLeft(str, pad string, length int) string {
 	for {
 		str = pad + str
-		if len(str) > lenght {
-			return str[0:lenght]
+		if len(str) > length {
+			return str[0:length]
 		}
 	}
 }
