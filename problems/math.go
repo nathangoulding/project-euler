@@ -50,6 +50,18 @@ func PascalsTriangle(rows int) [][]int {
 	return grid
 }
 
+func IsDeficientNumber(num int) bool {
+	return Summation(DivisorsOf(num)) < num
+}
+
+func IsPerfectNumber(num int) bool {
+	return Summation(DivisorsOf(num)) == num
+}
+
+func IsAbundantNumber(num int) bool {
+	return Summation(DivisorsOf(num)) > num
+}
+
 func BinomialCoefficientAsGrid(n int, k int) [][]int {
 	grid := make([][]int, n)
 	for i := range grid {
