@@ -33,6 +33,23 @@ func SumBigIntDigits(num *big.Int) int {
 	return Summation(digits)
 }
 
+func ProductDigits(num int) int {
+	var digits []int
+	for _, value := range strconv.Itoa(num) {
+		i, _ := strconv.Atoi(string(value))
+		digits = append(digits, i)
+	}
+	return Product(digits)
+}
+
+func Product(nums []int) int {
+	product := 1
+	for _, num := range nums {
+		product = product * num
+	}
+	return product
+}
+
 func PascalsTriangle(rows int) [][]int {
 	grid := make([][]int, rows)
 	for i := range grid {
@@ -188,6 +205,25 @@ func IsPrime(value int) bool {
 		}
 	}
 	return true
+}
+
+func FirstNPrimes(numPrimes int) []int {
+	primes := []int{2}
+	desiredPrimes := 1
+
+	test := 3
+L:
+	for {
+		if IsPrime(test) {
+			primes = append(primes, test)
+			desiredPrimes += 1
+			if desiredPrimes == numPrimes {
+				break L
+			}
+		}
+		test += 2
+	}
+	return primes
 }
 
 // sieve of eratosthenes
